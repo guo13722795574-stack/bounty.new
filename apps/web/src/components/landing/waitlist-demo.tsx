@@ -3,7 +3,7 @@
 import { authClient } from '@bounty/auth/client';
 import { Button } from '@bounty/ui/components/button';
 import NumberFlow from '@bounty/ui/components/number-flow';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { GithubIcon } from '@bounty/ui/components/icons/huge/github';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -37,6 +37,7 @@ function writeStoredWaitlist(data: WaitlistCookieData) {
 
 function useWaitlistSubmission() {
   const { celebrate } = useConfetti();
+  const queryClient = useQueryClient();
   const [success, setSuccess] = useState(false);
 
   const { mutate, isPending } = useMutation({
@@ -50,6 +51,10 @@ function useWaitlistSubmission() {
         email: '',
       };
       writeStoredWaitlist(cookieData);
+
+      queryClient.invalidateQueries({
+        queryKey: trpc.earlyAccess.getWaitlistCount.queryKey(),
+      });
 
       celebrate();
       toast.success("You're on the list!");
