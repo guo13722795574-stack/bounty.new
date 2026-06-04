@@ -150,43 +150,113 @@ function WaitlistPage({ compact = false }: WaitlistPageProps) {
 
           {/* Success state */}
           {waitlistSubmission.success ? (
-            <div className={`text-left ${compact ? 'py-2' : 'py-4'}`}>
+            <div className={`text-left ${compact ? 'py-1' : 'py-2'}`}>
               <div
-                className={`inline-flex items-center justify-center ${compact ? 'w-8 h-8 mb-2' : 'w-12 h-12 mb-4'} rounded-full bg-brand-accent/10`}
+                className={`rounded-2xl border border-border-subtle bg-surface-1 shadow-sm ${compact ? 'p-3' : 'p-5'}`}
               >
-                <svg
-                  className={`${compact ? 'w-4 h-4' : 'w-6 h-6'} text-brand-accent`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                <div
+                  className={`flex items-start justify-between gap-3 ${compact ? 'mb-3' : 'mb-5'}`}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2.5}
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
-              </div>
-              <h2
-                className={`${compact ? 'text-base' : 'text-xl'} font-medium text-foreground mb-1`}
-              >
-                You're on the list
-              </h2>
-              <p
-                className={`${compact ? 'text-xs mb-3' : 'text-sm mb-6'} text-text-muted`}
-              >
-                We'll reach out when it's your turn.
-              </p>
-              <div
-                className={`inline-flex items-center gap-2 ${compact ? 'px-2 py-1' : 'px-3 py-1.5'} rounded-full bg-surface-1 border border-border-subtle`}
-              >
-                <span className="text-xs text-text-muted">Position</span>
-                <span
-                  className={`${compact ? 'text-xs' : 'text-sm'} font-medium text-brand-accent-muted`}
+                  <div>
+                    <div
+                      className={`inline-flex items-center justify-center ${compact ? 'w-8 h-8 mb-2' : 'w-11 h-11 mb-3'} rounded-full bg-success/10 text-success`}
+                    >
+                      <svg
+                        className={compact ? 'w-4 h-4' : 'w-5 h-5'}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M5 13l4 4L19 7"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2.5}
+                        />
+                      </svg>
+                    </div>
+                    <h2
+                      className={`${compact ? 'text-base' : 'text-xl'} font-medium text-foreground mb-1`}
+                    >
+                      You're on the list
+                    </h2>
+                    <p
+                      className={`${compact ? 'text-[11px]' : 'text-sm'} text-text-muted leading-relaxed`}
+                    >
+                      We'll send your early-access invite as soon as your spot
+                      opens.
+                    </p>
+                  </div>
+
+                  <div
+                    className={`shrink-0 rounded-full border border-border-subtle bg-background text-center ${compact ? 'px-2.5 py-1.5' : 'px-3.5 py-2'}`}
+                  >
+                    <div
+                      className={`${compact ? 'text-[10px]' : 'text-xs'} text-text-muted`}
+                    >
+                      Position
+                    </div>
+                    <div
+                      className={`${compact ? 'text-sm' : 'text-lg'} font-medium text-brand-accent-muted`}
+                    >
+                      #<NumberFlow value={waitlistCount} />
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  className={`grid grid-cols-2 gap-2 ${compact ? 'mb-3' : 'mb-5'}`}
                 >
-                  #{waitlistCount}
-                </span>
+                  <div className="rounded-xl border border-border-subtle bg-background/60 px-3 py-2">
+                    <p
+                      className={`${compact ? 'text-[10px]' : 'text-xs'} text-text-muted`}
+                    >
+                      Status
+                    </p>
+                    <p
+                      className={`${compact ? 'text-xs' : 'text-sm'} font-medium text-foreground`}
+                    >
+                      Confirmed
+                    </p>
+                  </div>
+                  <div className="rounded-xl border border-border-subtle bg-background/60 px-3 py-2">
+                    <p
+                      className={`${compact ? 'text-[10px]' : 'text-xs'} text-text-muted`}
+                    >
+                      Next
+                    </p>
+                    <p
+                      className={`${compact ? 'text-xs' : 'text-sm'} font-medium text-foreground`}
+                    >
+                      Invite email
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between gap-3 border-border-subtle border-t pt-3">
+                  <div className="-space-x-2 flex">
+                    {['/nizzy.jpg', '/brandon.jpg', '/adam.jpg'].map(
+                      (src) => (
+                        <div
+                          className={`${compact ? 'w-6 h-6' : 'w-8 h-8'} rounded-full border-2 border-surface-1 overflow-hidden bg-background`}
+                          key={src}
+                        >
+                          <Image
+                            alt=""
+                            height={compact ? 24 : 32}
+                            src={src}
+                            width={compact ? 24 : 32}
+                          />
+                        </div>
+                      )
+                    )}
+                  </div>
+                  <p
+                    className={`${compact ? 'text-[10px]' : 'text-xs'} text-text-muted text-right`}
+                  >
+                    Joined by builders shipping real fixes.
+                  </p>
+                </div>
               </div>
             </div>
           ) : (
